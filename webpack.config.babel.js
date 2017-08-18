@@ -30,7 +30,15 @@ export default {
         loader: 'file-loader',
       },
       {
+        test: /\.global\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?sourceMap'
+        ]
+      },
+      {
         test: /\.css$/, 
+        exclude: /\.global\.css$/,
         loaders: [
           'style-loader',
           'css-loader?modules&sourceMap&camelCase=dashes&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'

@@ -1,0 +1,9 @@
+body {
+  padding: 5px;
+  margin: 0;
+  font-family: "Helvetica", "Segoe UI", "SF UI text", sans-serif;
+}
+
+input:focus {
+  outline: none;
+}

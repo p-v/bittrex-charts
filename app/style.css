@@ -1,0 +1,38 @@
+.market-loader {
+  font-size: 18px;
+  padding: 25px;
+  text-align: center;
+}
+
+.header {
+  height: 36px;
+  margin: 0;
+  border-bottom: 1px solid #666666;
+}
+
+.header * {
+  display: inline-block;
+}
+
+.header input {
+  border: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.content {
+  position:absolute;
+  top: 50px;
+  left:5px;
+  right:0px;
+  bottom:0px;
+  overflow-y:scroll;    
+}
+
+.market {
+  cursor: pointer;
+}
+
+.market:hover {
+  color: #2E8B57;
+}

@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import rp from 'request-promise';
 import openChartWindow from './chart';
+import Loader from './loader';
+import './app.global.css';
+import Style from './style.css';
 
 const MarketRow = (props) => {
   return (
-    <div onClick={() => props.onMarketClick(props.marketName)}>
+    <div
+      onClick={() => props.onMarketClick(props.marketName)}
+      className={Style.market}
+    >
       {props.marketName}
     </div>
   );
@@ -15,10 +21,15 @@ class App extends React.Component {
 
   constructor() {
     super();
-    this.state = { markets: [], error: null };
+    this.state = { markets: [], error: null, search: '' };
     this.fetchMarkets = this.fetchMarkets.bind(this);
     this.onMarketClick = this.onMarketClick.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
     this.fetchMarkets();
+  }
+
+  onSearchChange(event) {
+    this.setState({ search: event.target.value });
   }
 
   onMarketClick(marketName) {
@@ -41,8 +52,8 @@ class App extends React.Component {
     });
   }
 
-  render () {
-    const { markets, error } = this.state;
+  render() {
+    const { markets, error, search } = this.state;
     if (error) {
       return (
         <div>
@@ -50,11 +61,37 @@ class App extends React.Component {
         </div>
       );
     }
+    if (!markets || markets.length === 0) {
+      return (
+        <div className={Style.loader}>
+          <Loader />
+          <div className={Style.marketLoader}>Loading Markets...</div>
+        </div>
+      );
+    }
     const rows = markets && markets.length > 0 &&
-      markets.map((market, index) => (<MarketRow key={index} marketName={market} onMarketClick={this.onMarketClick} />));
+      markets.filter(market => market.toLowerCase().indexOf(search.toLowerCase()) !== -1).map((market, index) => {
+        return (
+          <MarketRow
+            key={market}
+            marketName={market}
+            onMarketClick={this.onMarketClick}
+          />
+        )
+    });
     return (
       <div>
-        {rows}
+        <div className={Style.header}>
+          <h2 className={Style.header}>Markets</h2>
+          <input
+            type="text"
+            onChange={this.onSearchChange}
+            placeholder="Search Market"
+          />
+        </div>
+        <div className={Style.content}>
+          {rows}
+        </div>
       </div>
     );
   }
