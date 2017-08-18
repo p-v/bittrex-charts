@@ -3,13 +3,13 @@ import path from 'path';
 export default {
   target: 'electron-renderer',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'app', 'dist'),
     filename: "[name].js",
     libraryTarget: 'commonjs2'
   },
   entry: {
     markets: [
-      './renderer.js',
+      './app/index.js',
     ]
   },
   module: {

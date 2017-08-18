@@ -4,8 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack --watch",
-    "start": "electron ."
+    "dev": "webpack --watch app",
+    "start": "electron app"
   },
   "keywords": [
     "Electron"
