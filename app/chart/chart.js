@@ -4,12 +4,14 @@ import { ipcRenderer } from 'electron';
 import Style from './style.css';
 import Sidebar, { sidebarActions } from './siderbar';
 import PreloadScript from './preload.asitis.js';
+import Loader from '../loader';
+import '../app.global.css';
 
 class Chart extends React.Component {
 
   constructor() {
     super();
-    this.state = { market: undefined, showSidebar: false };
+    this.state = { market: undefined, showSidebar: false, loaderTimeoutReached: false };
     this.onSidebarMouseEnter = this.onSidebarMouseEnter.bind(this);
     this.onSidebarAction = this.onSidebarAction.bind(this);
   }
@@ -32,10 +34,12 @@ class Chart extends React.Component {
   }
 
   render () {
-    const { market, showSidebar } = this.state;
-    if (!market) {
+    const { market, showSidebar, loaderTimeoutReached } = this.state;
+    if (!market || !loaderTimeoutReached) {
       return (
-        <div>Loading...</div>
+        <div>
+          <Loader />
+        </div>
       );
     }
     return (
@@ -62,13 +66,14 @@ class Chart extends React.Component {
     ipcRenderer.once('onMarket', (event, { market }) => {
       this.setState({ market });
     });
+    setTimeout(() => {
+      this.setState({ loaderTimeoutReached: true });
+    }, 1000);
   }
 
   componentDidUpdate() {
-    if (!this.webviewListenerAdded) {
+    if (this.webview && !this.webviewListenerAdded) {
       this.webviewListenerAdded = true;
-
-      console.log('attach message listener');
       // Process the data from the webview
       this.webview.addEventListener('ipc-message', () => {
         this.setState({ showSidebar: false });

@@ -15,7 +15,6 @@ export default function openChartWindow(market) {
   });
 
   const indexPath = `${app.getAppPath()}/dist/${Index}`;
-  console.log(indexPath);
 
   win.loadURL(url.format({
     pathname: indexPath,
