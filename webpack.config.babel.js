@@ -33,7 +33,7 @@ export default {
         test: /\.css$/, 
         loaders: [
           'style-loader',
-          'css-loader?sourceMap'
+          'css-loader?modules&sourceMap&camelCase=dashes&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
         ]
       },
       {
