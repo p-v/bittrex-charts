@@ -5,7 +5,15 @@
   "main": "main.js",
   "scripts": {
     "dev": "webpack --watch app",
-    "start": "electron app"
+    "start": "electron app",
+    "install-app": "cd app && npm install",
+    "postinstall": "npm run install-app",
+    "pack": "npm run pack:linux32 && npm run pack:linux64 && npm run pack:osx && npm run pack:win32 && npm run pack:win64",
+    "pack:linux32": "electron-packager ./app $npm_package_name --out=dist/ --platform=linux --arch=ia32 --version=1.7.5 --overwrite",
+    "pack:linux64": "electron-packager ./app $npm_package_name --out=dist/ --platform=linux --arch=x64 --version=1.7.5 --overwrite",
+    "pack:osx": "electron-packager ./app $npm_package_name --out=dist/ --platform=darwin --arch=x64 --version=1.7.5 --icon=icons/icon.icns  --overwrite",
+    "pack:win32": "electron-packager ./app $npm_package_name --out=dist/ --platform=win32 --arch=ia32 --version=1.7.5 --icon=icons/icon.ico --overwrite",
+    "pack:win64": "electron-packager ./app $npm_package_name --out=dist/ --platform=win32 --arch=x64 --version=1.7.5 --icon=icons/icon.ico --overwrite"
   },
   "keywords": [
     "Electron"
@@ -25,15 +33,9 @@
     "babel-register": "^6.26.0",
     "css-loader": "^0.28.5",
     "electron": "^1.7.5",
+    "electron-packager": "^8.7.2",
     "file-loader": "^0.11.2",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.5"
-  },
-  "dependencies": {
-    "es6-promise": "^4.1.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1"
   }
 }
