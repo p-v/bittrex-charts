@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "clean": "rm -rf dist && rm -rf app/dist",
     "dev": "webpack --watch app",
     "start": "electron app",
     "install-app": "cd app && npm install",

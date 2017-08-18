@@ -7,11 +7,12 @@ export default function openChartWindow(market) {
   const { remote } = electron;
   const { BrowserWindow, app } = remote;
   let win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 700,
+    height: 500,
     webPreferences: {
       webSecurity: false
-    }
+    },
+    title: market,
   });
 
   const indexPath = `${app.getAppPath()}/dist/${Index}`;
