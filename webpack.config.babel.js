@@ -1,8 +1,16 @@
-module.exports={
-  entry: './renderer.js',
+import path from 'path';
+
+export default {
   target: 'electron-renderer',
-  output:{
-    filename:'./renderer-bundle.js'
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: "[name].js",
+    libraryTarget: 'commonjs2'
+  },
+  entry: {
+    markets: [
+      './renderer.js',
+    ]
   },
   module: {
     loaders: [
