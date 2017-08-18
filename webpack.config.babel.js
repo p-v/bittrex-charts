@@ -10,6 +10,9 @@ export default {
   entry: {
     markets: [
       './app/index.js',
+    ],
+    chart: [
+      './app/chart/chart.js',
     ]
   },
   module: {
@@ -21,6 +24,21 @@ export default {
         query:{
           presets:['react','es2015']
         }
+      },
+      {
+        test: /\.html$/, 
+        loader: 'file-loader',
+      },
+      {
+        test: /\.css$/, 
+        loaders: [
+          'style-loader',
+          'css-loader?sourceMap'
+        ]
+      },
+      {
+        test: /\.asitis\.js$/,
+        loader: 'file-loader'
       }
     ]
   }

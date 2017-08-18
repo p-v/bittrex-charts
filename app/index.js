@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import rp from 'request-promise';
+import openChartWindow from './chart';
 
 const MarketRow = (props) => {
   return (
@@ -21,17 +22,7 @@ class App extends React.Component {
   }
 
   onMarketClick(marketName) {
-    // Create new browser window
-    const {BrowserWindow} = require('electron').remote
-    let win = new BrowserWindow({
-      width: 800,
-      height: 600,
-      webPreferences: {
-        webSecurity: false,
-        nodeIntegration: false,
-      }
-    })
-    win.loadURL(`https://bittrex.com/market/MarketStandardChart?marketName=${marketName}`)
+    openChartWindow(marketName);
   }
 
   fetchMarkets() {
