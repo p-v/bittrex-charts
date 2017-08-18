@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ipcRenderer } from 'electron';
 import Style from './style.css';
-import Sidebar, { sidebarActions } from './siderbar';
+import Sidebar, { sidebarActions } from './sidebar';
 import PreloadScript from './preload.asitis.js';
 import Loader from '../loader';
 import '../app.global.css';
