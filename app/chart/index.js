@@ -12,7 +12,6 @@ export default function openChartWindow(market) {
     webPreferences: {
       webSecurity: false
     },
-    title: market,
   });
 
   const indexPath = `${app.getAppPath()}/dist/${Index}`;
@@ -22,6 +21,8 @@ export default function openChartWindow(market) {
     protocol: 'file:',
     slashes: true
   }))
+
+  win.setTitle(market);
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.send('onMarket', { market });

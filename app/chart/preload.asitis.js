@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
 
 window.addEventListener('click', () => {
-  ipcRenderer.sendToHost(JSON.stringify({ clicked: true }));
+  ipcRenderer.sendToHost({ type: 'click'});
 });
 
 ipcRenderer.on('toggle_navigation', () => {
@@ -11,6 +11,7 @@ ipcRenderer.on('toggle_navigation', () => {
   } else {
     navigationBar.style.display = '';
   }
+  ipcRenderer.sendToHost({ type: 'reset-title'});
 });
 
 ipcRenderer.on('toggle_toolbar', () => {
@@ -20,4 +21,5 @@ ipcRenderer.on('toggle_toolbar', () => {
   } else {
     toolbar.style.display = '';
   }
+  ipcRenderer.sendToHost({ type: 'reset-title'});
 });

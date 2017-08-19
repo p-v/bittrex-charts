@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, remote } from 'electron';
 import Style from './style.css';
 import Sidebar, { sidebarActions } from './sidebar';
 import PreloadScript from './preload.asitis.js';
@@ -23,6 +23,7 @@ class Chart extends React.Component {
         break;
       case sidebarActions.TOGGLE_TOOLBAR:
         this.webview.send("toggle_toolbar");
+        
         break;
       default:
         break;
@@ -75,8 +76,14 @@ class Chart extends React.Component {
     if (this.webview && !this.webviewListenerAdded) {
       this.webviewListenerAdded = true;
       // Process the data from the webview
-      this.webview.addEventListener('ipc-message', () => {
-        this.setState({ showSidebar: false });
+      this.webview.addEventListener('ipc-message', (event) => {
+        const data = event.channel;
+        if (data.type === 'click') {
+          this.setState({ showSidebar: false });
+        } else if (data.type === 'reset-title' && this.state.market) {
+          const currentWindow = remote.getCurrentWindow();
+          currentWindow.setTitle(this.state.market);
+        }
       });
     }
   }

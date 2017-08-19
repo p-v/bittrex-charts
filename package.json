@@ -10,11 +10,11 @@
     "install-app": "cd app && npm install",
     "postinstall": "npm run install-app",
     "pack": "npm run pack:linux32 && npm run pack:linux64 && npm run pack:osx && npm run pack:win32 && npm run pack:win64",
-    "pack:linux32": "electron-packager ./app $npm_package_name --out=dist/ --platform=linux --arch=ia32 --version=1.7.5 --overwrite",
-    "pack:linux64": "electron-packager ./app $npm_package_name --out=dist/ --platform=linux --arch=x64 --version=1.7.5 --overwrite",
-    "pack:osx": "electron-packager ./app $npm_package_name --out=dist/ --platform=darwin --arch=x64 --version=1.7.5 --icon=icons/icon.icns  --overwrite",
-    "pack:win32": "electron-packager ./app $npm_package_name --out=dist/ --platform=win32 --arch=ia32 --version=1.7.5 --icon=icons/icon.ico --overwrite",
-    "pack:win64": "electron-packager ./app $npm_package_name --out=dist/ --platform=win32 --arch=x64 --version=1.7.5 --icon=icons/icon.ico --overwrite"
+    "pack:linux32": "electron-packager ./app $npm_package_name --out=dist/ --platform=linux --arch=ia32 --electron-version=1.7.5 --overwrite",
+    "pack:linux64": "electron-packager ./app $npm_package_name --out=dist/ --platform=linux --arch=x64 --electron-version=1.7.5 --overwrite",
+    "pack:osx": "electron-packager ./app $npm_package_name --out=dist/ --platform=darwin --arch=x64 --electron-version=1.7.5 --icon=icons/icon.icns  --overwrite",
+    "pack:win32": "electron-packager ./app $npm_package_name --out=dist/ --platform=win32 --arch=ia32 --electron-version=1.7.5 --icon=icons/icon.ico --overwrite",
+    "pack:win64": "electron-packager ./app $npm_package_name --out=dist/ --platform=win32 --arch=x64 --electron-version=1.7.5 --icon=icons/icon.ico --overwrite"
   },
   "keywords": [
     "Electron"
